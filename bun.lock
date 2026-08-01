@@ -5,7 +5,7 @@
     "": {
       "name": "mynumber-generator",
       "dependencies": {
-        "@raycast/api": "^1.85.0",
+        "@raycast/api": "^1.104.24",
       },
       "devDependencies": {
         "@types/node": "^22.0.0",

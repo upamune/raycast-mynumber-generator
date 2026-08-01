@@ -47,5 +47,6 @@ tagpr automates releases: every push to main creates/updates a release PR (bumps
 ## Store Submission Notes
 
 - Store PR: https://github.com/raycast/extensions/pull/29894. Re-running `bun run publish` updates the same PR.
-- `metadata/` screenshots must be 2000x1250 PNG, and the store CI validates content padding: 8–17% on every edge, top/bottom and left/right roughly symmetric (diff ≤ 4%). Wide or square captures (HUDs, settings windows) cannot pass; compose window captures onto a solid background with ~12% padding (see the validator failure in the PR history).
+- `metadata/` screenshots must be 2000x1250 PNG, and the store CI validates content padding: 8–17% on every edge, top/bottom and left/right roughly symmetric (diff ≤ 4%). Wide or square captures (HUDs, settings windows) cannot pass. The validator detects the window by luminance gradients, so drop shadows do NOT count as content — position based on the detected window edges, not the alpha bounding box (see `scratchpad`-style two-pass compositing in the git history of `metadata/`). Validate locally with `bun run check:metadata` (`scripts/check_raycast_images.py` is vendored from raycast/extensions; requires Python with numpy and Pillow).
+- `ray publish` copies files to the store PR branch but never deletes removed ones; delete stale files on the fork branch (`upamune/raycast-extensions`, branch `ext/mynumber-generator`) via the GitHub contents API.
 - `author` in package.json is the Raycast account handle (`serizawa`), not the GitHub username.

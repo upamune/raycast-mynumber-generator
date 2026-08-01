@@ -31,12 +31,20 @@ Qn: n が 1〜6 のとき n + 1、7〜11 のとき n − 5
 
 ## 開発
 
+ツールチェインは [mise](https://mise.jdx.dev/) で管理しています（bun / node）。
+
 ```sh
-npm install
-npm run dev   # Raycast で開発モード起動
-npm test      # チェックデジットロジックのテスト
-npm run lint  # Lint
+mise install       # bun / node をインストール
+bun install
+bun run dev        # Raycast で開発モード起動
+bun test src       # チェックデジットロジックのテスト
+bun run lint       # oxlint
+bun run fmt        # oxfmt（fmt:check でチェックのみ）
+bun run knip       # 未使用の依存・エクスポート検出
+bun run build      # ray build
 ```
+
+CI（GitHub Actions）では fmt:check / lint / knip / test / build を実行しています。actions のバージョンは [pinact](https://github.com/suzuki-shunsuke/pinact) でコミットSHAに固定しています。
 
 ## License
 

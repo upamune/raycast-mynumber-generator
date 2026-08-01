@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "mynumber-generator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Generate dummy but checksum-valid Mynumbers (Japanese Individual Numbers) for testing.",
   "categories": [
     "Data",

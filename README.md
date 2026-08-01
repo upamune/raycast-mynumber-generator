@@ -46,6 +46,16 @@ bun run build      # ray build
 
 CI（GitHub Actions）では fmt:check / lint / knip / test / build を実行しています。actions のバージョンは [pinact](https://github.com/suzuki-shunsuke/pinact) でコミットSHAに固定しています。
 
+## リリース
+
+[tagpr](https://github.com/Songmu/tagpr) でリリースを自動化しています。
+
+1. main への push をトリガーに tagpr がリリース PR を作成・更新する（`package.json` の version を bump）
+2. リリース PR をマージすると `vX.Y.Z` タグが打たれる
+3. タグ push をトリガーに Release workflow が `ray build` でビルドし、成果物の zip を添付した GitHub Release を作成する
+
+tagpr が push したタグで workflow を起動するため、GitHub App のトークンを使用しています（リポジトリの variable `TAGPR_APP_ID` と secret `TAGPR_PRIVATE_KEY` が必要）。
+
 ## License
 
 MIT

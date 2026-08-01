@@ -1,60 +1,60 @@
 # Mynumber Generator
 
-チェックデジットが正しいダミーのマイナンバー（個人番号）を生成する Raycast 拡張です。テストデータ作成用途を想定しています。
+A Raycast extension that generates dummy My Numbers (Japanese Individual Numbers) with a valid check digit. Intended for creating test data.
 
 > [!WARNING]
-> 生成される番号はランダムなダミーです。チェックデジットの形式検証は通りますが、実在の個人番号とは一切関係ありません。実在の番号と偶然一致する可能性は理論上ありますが、意図的なものではありません。
+> Generated numbers are random dummies. They pass the check-digit validation but have no relation to any real Individual Number. Any coincidental match with a real number is unintentional.
 
-## 機能
+## Features
 
-- `Generate Mynumbers` コマンドで、指定した個数のダミーのマイナンバーを一括生成
-- 生成した番号をクリップボードにコピー、またはアクティブなウィンドウにペースト（Preferences で切替）
-- `1234-5678-9012` のようなハイフン区切りフォーマットにも対応（Preferences で切替）
+- `Generate Mynumbers` command generates any number of dummy My Numbers at once
+- Copy the generated numbers to the clipboard, or paste them into the frontmost application (configurable in Preferences)
+- Optional hyphen-separated format like `1234-5678-9012` (configurable in Preferences)
 
-## 使い方
+## Usage
 
-1. Raycast で `Generate Mynumbers` を実行
-2. 引数に生成したい個数を入力（省略時は Preferences の `Default Number of Mynumbers` を使用）
-3. 生成された番号がコピー（またはペースト）される
+1. Run `Generate Mynumbers` in Raycast
+2. Enter how many numbers to generate as the argument (falls back to the `Default Number of Mynumbers` preference)
+3. The generated numbers are copied (or pasted)
 
-## チェックデジットの算出
+## Check Digit
 
-行政手続における特定の個人を識別するための番号の利用等に関する法律の施行に伴う総務省令（平成26年総務省令第85号）に定められた算式に従っています。
+The check digit is calculated according to the formula defined in the Ministry of Internal Affairs and Communications Ordinance No. 85 of 2014:
 
 ```
-検査用数字 = 11 − (Σ(n=1..11) Pn × Qn を 11 で除した余り)
-※ 余りが 1 以下の場合は 0
+check digit = 11 − ((Σ(n=1..11) Pn × Qn) mod 11)
+(0 when the remainder is 1 or less)
 
-Pn: 検査用数字を除いた11桁のうち最下位から数えて n 番目の数字
-Qn: n が 1〜6 のとき n + 1、7〜11 のとき n − 5
+Pn: the n-th digit of the 11 base digits, counted from the rightmost digit
+Qn: n + 1 when n ≤ 6, n − 5 when n ≥ 7
 ```
 
-## 開発
+## Development
 
-ツールチェインは [mise](https://mise.jdx.dev/) で管理しています（bun / node）。
+The toolchain is managed with [mise](https://mise.jdx.dev/) (bun / node).
 
 ```sh
-mise install       # bun / node をインストール
+mise install       # install bun / node
 bun install
-bun run dev        # Raycast で開発モード起動
-bun test src       # チェックデジットロジックのテスト
+bun run dev        # start development mode in Raycast
+bun test src       # tests for the check-digit logic
 bun run lint       # oxlint
-bun run fmt        # oxfmt（fmt:check でチェックのみ）
-bun run knip       # 未使用の依存・エクスポート検出
+bun run fmt        # oxfmt (fmt:check for check only)
+bun run knip       # detect unused dependencies and exports
 bun run build      # ray build
 ```
 
-CI（GitHub Actions）では fmt:check / lint / knip / test / build を実行しています。actions のバージョンは [pinact](https://github.com/suzuki-shunsuke/pinact) でコミットSHAに固定しています。
+CI (GitHub Actions) runs fmt:check / lint / knip / test / build. Action versions are pinned to commit SHAs with [pinact](https://github.com/suzuki-shunsuke/pinact).
 
-## リリース
+## Release
 
-[tagpr](https://github.com/Songmu/tagpr) でリリースを自動化しています。
+Releases are automated with [tagpr](https://github.com/Songmu/tagpr).
 
-1. main への push をトリガーに tagpr がリリース PR を作成・更新する（`package.json` の version を bump）
-2. リリース PR をマージすると `vX.Y.Z` タグが打たれる
-3. タグ push をトリガーに Release workflow が `ray build` でビルドし、成果物の zip を添付した GitHub Release を作成する
+1. On every push to main, tagpr creates or updates a release PR (bumping `version` in `package.json`)
+2. Merging the release PR creates a `vX.Y.Z` tag
+3. The tag push triggers the Release workflow, which builds the extension with `ray build` and creates a GitHub Release with the zipped artifact
 
-tagpr が push したタグで workflow を起動するため、GitHub App のトークンを使用しています（リポジトリの variable `TAGPR_APP_ID` と secret `TAGPR_PRIVATE_KEY` が必要）。
+tagpr uses a GitHub App token so that the pushed tag triggers workflows (requires the repository variable `TAGPR_APP_ID` and secret `TAGPR_PRIVATE_KEY`).
 
 ## License
 

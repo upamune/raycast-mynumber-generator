@@ -7,7 +7,7 @@
     "Developer Tools"
   ],
   "license": "MIT",
-  "author": "upamune",
+  "author": "serizawa",
   "scripts": {
     "build": "ray build -e dist -o dist",
     "dev": "ray develop",

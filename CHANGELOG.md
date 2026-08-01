@@ -1,6 +1,7 @@
-# My Number Generator Changelog
+# Mynumber Generator Changelog
 
-## [Initial Version] - 2026-08-01
+## [Initial Version] - {PR_MERGE_DATE}
 
-- `Generate My Numbers` コマンドを追加
-- チェックデジット準拠のダミーマイナンバー生成、コピー/ペースト、ハイフン区切り対応
+- Add `Generate Mynumbers` command: generates dummy My Numbers (Japanese Individual Numbers) with a valid check digit
+- Copy to clipboard or paste to the frontmost application (configurable default action)
+- Optional hyphen-separated format (`1234-5678-9012`)

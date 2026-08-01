@@ -37,7 +37,7 @@ export default async function Command(
   if (numberOfMyNumbers > MY_NUMBERS_MAX_NUMBER) {
     await showToast({
       style: Toast.Style.Failure,
-      title: "Too many My Numbers requested",
+      title: "Too many Mynumbers requested",
       message: `${numberOfMyNumbers} exceeds the maximum of ${MY_NUMBERS_MAX_NUMBER}.`,
     });
     return;
@@ -47,7 +47,7 @@ export default async function Command(
     formatMyNumber(generateMyNumber(), hyphenSeparated),
   );
   const output = myNumbers.join("\r\n");
-  const label = numberOfMyNumbers === 1 ? "My Number" : `${numberOfMyNumbers} My Numbers`;
+  const label = numberOfMyNumbers === 1 ? "Mynumber" : `${numberOfMyNumbers} Mynumbers`;
 
   if (defaultAction === "paste") {
     await Clipboard.paste(output);

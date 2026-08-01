@@ -1,4 +1,4 @@
-# My Number Generator
+# Mynumber Generator
 
 チェックデジットが正しいダミーのマイナンバー（個人番号）を生成する Raycast 拡張です。テストデータ作成用途を想定しています。
 
@@ -7,14 +7,14 @@
 
 ## 機能
 
-- `Generate My Numbers` コマンドで、指定した個数のダミーのマイナンバーを一括生成
+- `Generate Mynumbers` コマンドで、指定した個数のダミーのマイナンバーを一括生成
 - 生成した番号をクリップボードにコピー、またはアクティブなウィンドウにペースト（Preferences で切替）
 - `1234-5678-9012` のようなハイフン区切りフォーマットにも対応（Preferences で切替）
 
 ## 使い方
 
-1. Raycast で `Generate My Numbers` を実行
-2. 引数に生成したい個数を入力（省略時は Preferences の `Default Number of My Numbers` を使用）
+1. Raycast で `Generate Mynumbers` を実行
+2. 引数に生成したい個数を入力（省略時は Preferences の `Default Number of Mynumbers` を使用）
 3. 生成された番号がコピー（またはペースト）される
 
 ## チェックデジットの算出

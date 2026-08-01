@@ -16,7 +16,7 @@
     "fmt:check": "oxfmt --check",
     "knip": "knip",
     "test": "bun test src",
-    "publish": "bunx @raycast/api@latest publish"
+    "publish": "npm install --package-lock-only && bunx @raycast/api@latest publish"
   },
   "dependencies": {
     "@raycast/api": "^1.85.0"
